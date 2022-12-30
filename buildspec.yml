@@ -6,6 +6,7 @@ phases:
       - REPOSITORY_URI=444397746555.dkr.ecr.ap-northeast-1.amazonaws.com
       - IMAGE_TAG=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | cut -c 1-7)
       - IMAGE_NAME=ecs-cicd-rolling-ecsdemo-frontend
+      - CONTAINER_NAME=ecsdemo-frontend
 
   build:
     commands:
@@ -15,7 +16,7 @@ phases:
   post_build:
     commands:
       - docker push ${REPOSITORY_URI}/${IMAGE_NAME}:${IMAGE_TAG}
-      - printf '[{"name":"%s","imageUri":"%s"}]' "${IMAGE_NAME}" "${REPOSITORY_URI}/${IMAGE_NAME}:${IMAGE_TAG}" > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' "${CONTAINER_NAME}" "${REPOSITORY_URI}/${IMAGE_NAME}:${IMAGE_TAG}" > imagedefinitions.json
 
 artifacts:
   files: imagedefinitions.json
