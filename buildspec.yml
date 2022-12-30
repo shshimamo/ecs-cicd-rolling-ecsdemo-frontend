@@ -15,7 +15,7 @@ phases:
   post_build:
     commands:
       - docker push ${REPOSITORY_URI}/${IMAGE_NAME}:${IMAGE_TAG}
-      - printf \'[{"name":"%s","imageUri":"%s"}]\' "${IMAGE_NAME}" "${REPOSITORY_URI}/${IMAGE_NAME}:${IMAGE_TAG}" > imageDetail.json
+      - printf \'[{"name":"%s","imageUri":"%s"}]\' "${IMAGE_NAME}" "${REPOSITORY_URI}/${IMAGE_NAME}:${IMAGE_TAG}" > imagedefinitions.json
 
 artifacts:
-  files: imageDetail.json
+  files: imagedefinitions.json
